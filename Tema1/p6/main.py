@@ -2,10 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from prettytable import PrettyTable
 
+# Formula pentru eroare relativa
 relative_error = lambda prevx, x : abs((x - prevx) / x)
 
 fun = lambda x : x**3 - 7*x**2 + 14 * x - 6
-#fun = lambda x : np.sin(x) * np.cos(x ** x) - np.tan(x)
 
 def Bisectie(f, a, b, eps = 10**-3, out_ptable = None):
     counter = 0
@@ -39,7 +39,6 @@ def Bisectie(f, a, b, eps = 10**-3, out_ptable = None):
         xold = x
     
 if __name__ == '__main__':
-    
     result_points = []
     result_tables = []
     start_interval = 0
@@ -53,39 +52,27 @@ if __name__ == '__main__':
             result_points.append(pt['x'])
             result_tables.append(table)
 
+    print("Radacinile polinomului sunt:")
     print(result_points)
 
-    for table in result_tables:
+    for (index, table) in enumerate(result_tables):
+        print(f"Tabel pentru x = {result_points[index]}:")
         print(table)
+        print("\n")
 
     fig = plt.figure(1)
     ax = plt.axes()
-
     x = np.linspace(start_interval, end_interval, (end_interval - start_interval) * 50)
     y = fun(x)
-
     ax.plot(x, y, linestyle='-', lw = 2, color = 'b', label = 'y = f(x)')
-
     ax.scatter(result_points, np.zeros(len(result_points)), color="r")
     ax.grid(True, color = 'c')
-
     plt.xticks(np.arange(start_interval,end_interval,(int)((end_interval - start_interval) / 4)))
     plt.yticks(np.arange(min(y),max(y),(int)((end_interval - start_interval) / 4)))
-
     ax.legend(loc='best')
-
     plt.xlabel('X Axis')
     plt.ylabel('Y Axis')
-
     plt.title('Graph of f(x) = y')
-
     ax.axhline(y=0,color='k')
     ax.axvline(x=0,color='k')
-
-
-    
-
-
-
-
     plt.show()
