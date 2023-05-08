@@ -2,7 +2,8 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 
-fun = lambda x : math.sin(x) - (math.e ** (-x))
+fun2 = lambda x : math.sin(x) - (math.e ** (-x))
+fun= lambda x : 2 * x + 3 * math.cos(2 * x)
 relative_error = lambda prevx, x : abs((x - prevx) / x)
 
 def Secanta(f, x0, x1, a, b, eps = 10**-5):
@@ -55,9 +56,9 @@ if __name__ == '__main__':
     
     result_points1 = []
     result_points2 = []
-    start_interval = 0
-    end_interval = 10
-    jump_interval = 0.5
+    start_interval = -2
+    end_interval = 3
+    jump_interval = 0.01
 
     for i in np.linspace(start_interval, end_interval, (int)((end_interval - start_interval) / jump_interval)):
         
