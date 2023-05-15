@@ -97,7 +97,7 @@ print(sol)
 print(reverse_poly(sol, 1))
 print_rev_poly(sol)
 
-ig = plt.figure(1)
+fig = plt.figure(1)
 ax = plt.axes()
 
 x = np.linspace(min([x[0] for x in pts]) - 0.01, max(x[0] for x in pts) + 0.01, 200)
