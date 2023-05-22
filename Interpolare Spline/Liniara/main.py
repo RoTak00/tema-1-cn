@@ -7,8 +7,7 @@ def fun(px, n, x, a, b):
     for i in range(n):
         if x[i] <= px <= x[i+1]:
             return a[i] + b[i] * (px - x[i])
-    exit(1)
-    return
+    return 0
 
 x = int(input("How many points do you want to plot? "))
 pts = [[0, 0] for i in range(x)]
