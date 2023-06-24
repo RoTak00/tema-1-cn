@@ -225,13 +225,13 @@ def InterpolareLagrange(px, py, precision = 200, padding = 0.05):
 
     return plot_x, plot_y
 
-def DDHelper(arr, py, x):
+def DDHelper(arr, px, x):
     res = 0
 
     for i in range(len(arr)):
         subres = arr[i]
         for j in range(i):
-            subres *= (x - py[j])
+            subres *= (x - px[j])
         res += subres
 
     return res
@@ -252,7 +252,7 @@ def InterpolareDiferenteDivizate(px, py, precision = 200, padding = 0.05):
         Q[i] = dd[i,i]
 
     plot_x = np.linspace(min(px) - padding, max(px) + padding, precision)
-    plot_y = [DDHelper(Q, py, x) for x in plot_x]
+    plot_y = [DDHelper(Q, px, x) for x in plot_x]
 
     return plot_x, plot_y
 
