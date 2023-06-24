@@ -50,9 +50,42 @@ def FactorizareLUPivotarePartiala(A):
 
     return P, L, U
 
+
+def DescompunereCholesky(A):
+    # Check if the input matrix is square
+    if A.shape[0] != A.shape[1]:
+        print("Input matrix is not square.")
+        return None
+    
+    # Check if the input matrix is symmetric
+    if not np.allclose(A, A.T):
+        print("Input matrix is not symmetric.")
+        return None
+    
+    # Check if the input matrix is positive definite
+    if not np.all(np.linalg.eigvals(A) > 0):
+        print("Input matrix is not positive definite.")
+        return None
+    
+    n = A.shape[0]
+    L = np.zeros_like(A)
+
+    for i in range(n):
+        for j in range(i+1):
+            if i == j:
+                sum_term = np.sum(L[i, :j] ** 2)
+                L[i, j] = np.sqrt(A[i, i] - sum_term)
+            else:
+                sum_term = np.sum(L[i, :j] * L[j, :j])
+                L[i, j] = (A[i, j] - sum_term) / L[j, j]
+
+    return L
+
 if __name__ == "__main__":
-    A = np.array([[0, 1, 3], [1, 0, 6], [7, 8, 9]], float)
-    P, L, U = FactorizareLUFaraPivotare(A)
-    print(P)
-    print(L)
-    print(U)
+    A = np.array([[4, 2, -2],
+              [2, 5, -4],
+              [-2, -4, 11]], float)
+    L = cholesky_decomposition(A)
+    if L is not None:
+        print(L)
+        print(L.T)
